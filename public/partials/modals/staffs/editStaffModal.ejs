@@ -1,0 +1,94 @@
+<!-- EDIT STAFF MODAL-->
+
+<div
+  class="modal fade"
+  id="editStaffModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+        <button
+          class="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Edit Form Start-->
+        <form class="user" action="/edit_staff" method="POST">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control form-control-user"
+              aria-describedby="emailHelp"
+              placeholder="Name"
+              name="Name"
+              id="Name_Edit"
+            />
+          </div>
+
+          <div class="row">
+            <div class="form-group col">
+              <input
+                type="text"
+                class="form-control form-control-user"
+                placeholder="Staff ID"
+                name="Staff_ID"
+                id="Staff_ID_Edit"
+              />
+            </div>
+
+            <div class="form-group col">
+              <input
+                type="text"
+                class="form-control form-control-user"
+                placeholder="Department ID"
+                name="Department"
+                id="Department_Edit"
+              />
+            </div>
+
+            <div class="form-group col">
+              <input
+                type="number"
+                class="form-control form-control-user"
+                placeholder="Courses"
+                name="Courses"
+                id="Courses_Edit"
+              />
+            </div>
+          </div>
+
+
+            <div class="form-group col">
+              <input
+                type="text"
+                class="form-control form-control-user"
+                placeholder="Role"
+                name="Role"
+                id="Role_Edit"
+              />
+            </div>
+          </div>
+
+          <hr />
+          <input
+            type="submit"
+            name="update"
+            value="SUBMIT"
+            class="btn btn-primary btn-user btn-block"
+          />
+        </form>
+        <!-- Edit Form End-->
+      </div>
+    </div>
+  </div>
+</div>

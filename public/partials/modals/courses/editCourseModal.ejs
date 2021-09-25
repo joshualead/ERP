@@ -1,0 +1,140 @@
+<!-- EDIT COURSE MODAL-->
+<div
+  class="modal fade"
+  id="editModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+        <button
+          class="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Edit Form Start-->
+        <form class="user" action="/edit_course" method="POST">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control form-control-user"
+              aria-describedby="emailHelp"
+              placeholder="Course Name"
+              name="Course_Name"
+              id="Course_Name_Edit"
+            />
+          </div>
+
+          <div class="row">
+            <div class="form-group col">
+              <input
+                type="text"
+                class="form-control form-control-user"
+                placeholder="Course Code"
+                name="Course_Code"
+                id="Course_Code_Edit"
+              />
+            </div>
+
+            <div class="form-group col">
+              <input
+                type="text"
+                class="form-control form-control-user"
+                placeholder="Course ID"
+                name="Course_ID"
+                id="Course_ID_Edit"
+              />
+            </div>
+
+            <div class="form-group col">
+              <input
+                type="number"
+                class="form-control form-control-user"
+                placeholder="Semester"
+                name="Semester"
+                id="Semester_Edit"
+              />
+            </div>
+          </div>
+
+          <div class="row d-flex">
+            <div class="form-group col-4">
+              <select
+                class="form-control"
+                placeholder="Department"
+                name="Department"
+                style="border-radius: 50px; height: 50px"
+              >
+                <option value="CSE">CSE</option>
+                <option value="EEE">EEE</option>
+                <option value="MECH">MECH</option>
+                <option value="IT">IT</option>
+                <option value="ECE">ECE</option>
+              </select>
+            </div>
+
+            <div class="form-group col">
+              <input
+                type="text"
+                class="form-control form-control-user"
+                placeholder="Section"
+                name="Section"
+                id="Section_Edit"
+              />
+            </div>
+
+            <div class="form-group col">
+              <input
+                type="text"
+                class="form-control form-control-user"
+                placeholder="Year"
+                name="Year"
+                id="Year_Edit"
+              />
+            </div>
+          </div>
+
+          <div class="row d-flex">
+            <div class="form-group col">
+              <input
+                type="text"
+                class="form-control form-control-user"
+                placeholder="Regulation"
+                name="Regulation"
+                id="Regulation_Edit"
+              />
+            </div>
+
+            <div class="form-group col">
+              <input
+                type="number"
+                class="form-control form-control-user"
+                placeholder="credits"
+                name="Credits"
+                id="Credits_Edit"
+              />
+            </div>
+          </div>
+
+          <hr />
+          <input
+            type="submit"
+            name="edit"
+            value="Save Changes"
+            class="btn btn-success btn-user btn-block"
+          />
+        </form>
+        <!-- Edit Form End-->
+      </div>
+    </div>
+  </div>
+</div>

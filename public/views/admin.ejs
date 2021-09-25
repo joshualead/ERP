@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Admin</title>
+  <%- include('../partials/head'); %>
+</head>
+
+<body id="page-top">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+    <!-- Side Bar start -->
+    <%- include('../partials/sidebar_admin'); %>
+      <!-- Side Bar end   -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <div style="display: block">
+            <img src="../img/2021licet.jpg" alt="" />
+          </div>
+
+          <!-- Footer -->
+          <%- include('../partials/footer'); %>
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+      </div>
+      <!-- End of Page Wrapper -->
+  </div>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal Start -->
+  <%- include('../partials/modals/logout_modal'); %>
+    <!-- Logout Modal End   -->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+</body>
+
+</html>

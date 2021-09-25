@@ -1,0 +1,143 @@
+<!-- EDIT STUDENTS MODAL -->
+
+<div
+  class="modal fade"
+  id="editStudentModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+        <button
+          class="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Edit Form Start-->
+        <form class="user" action="/edit_students" method="POST">
+            
+            <!-- Roll_no, Department, Semester -->
+            <div class="row">
+                <div class="form-group col-4">
+                    <input type="text" class="form-control form-control-user"
+                        aria-describedby="emailHelp"
+                        placeholder="Roll_no"
+                        name="Edit_Roll_no"
+                        id="Edit_Roll_no">
+                </div>
+
+                <div class="form-group col-4">
+                    <select class="form-control"
+                    placeholder="Department"
+                    name="Edit_Department" id="Edit_Department" style="border-radius: 50px;height: 50px;">
+                        <option value="CSE">CSE</option>
+                        <option value="EEE">EEE</option>
+                        <option value="MECH">MECH</option>
+                        <option value="IT">IT</option>
+                        <option value="ECE">ECE</option>
+                    </select>    
+                </div>
+
+                <div class="form-group col-4">
+                    <input type="number" class="form-control form-control-user"
+                        aria-describedby="emailHelp"
+                        placeholder="Semester"
+                        name="Edit_Semester"
+                        id="Edit_Semester">
+                </div>
+
+            </div>
+
+            <!-- Year of Study, Section, Degree -->
+            <div class="row">
+
+                <div class="form-group col">
+                    <input type="text" class="form-control form-control-user"
+                        placeholder="Degree"
+                        name="Edit_Degree"
+                        id="Edit_Degree"> 
+                </div>                                          
+
+                <div class="form-group col">
+                    <input type="number" class="form-control form-control-user"
+                        placeholder="Year of Study"
+                        name="Edit_Year"
+                        id="Edit_Year"> 
+                </div>                                           
+                
+                <div class="form-group col">
+                    <input type="text" class="form-control form-control-user"
+                        placeholder="Section"
+                        name="Edit_Section"
+                        id="Edit_Section">
+                </div>
+            </div>
+
+            <!-- Register Number, Email_ID -->
+            <div class="row">
+
+                <div class="form-group col">
+                    <input type="text" class="form-control form-control-user"
+                        placeholder="Register Number"
+                        name="Edit_Register_Number"
+                        id="Edit_Register_Number"> 
+                </div>
+                
+                  <div class="form-group col">
+                    <input type="email" class="form-control form-control-user"
+                        placeholder="Emaild"
+                        name="Edit_Email_ID"
+                        id="Edit_Email_ID"> 
+                </div>                                          
+                
+
+
+            </div>
+            
+            <!-- History of Arrears, Current Arrears-->
+            <div class="row">
+                <div class="form-group col">
+                    <input type="number" class="form-control form-control-user"
+                        placeholder="History of Arrears"
+                        name="Edit_History_Arrears"
+                        id="Edit_History_Arrears"> 
+                </div>
+
+                <div class="form-group col">
+                    <input type="number" class="form-control form-control-user"
+                        placeholder="Current Arrears"
+                        name="Edit_Current_Arrears"
+                        id="Edit_Current_Arrears"> 
+                </div>
+                
+            </div>
+
+            <!-- Contact Number-->
+            <div class="row">
+                <div class="form-group col">
+                    <input type="number" class="form-control form-control-user"
+                        placeholder="Contact"
+                        name="Edit_Contact"
+                        id="Edit_Contact"> 
+                </div>
+
+            </div>
+
+        <hr>
+        <input type="submit" name="Signup" value="SUBMIT"  class="btn btn-primary btn-user btn-block" >
+        </div>
+        </form>
+        <!-- Edit Form End-->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Side Bar start -->
+        <%- include('../partials/sidebar_admin'); %>
+        <!-- Side Bar end   -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-4 text-gray-800">Add Staffs</h1>
+                </div>
+                <!-- Messages Display Start -->
+                <% if(msg == 1)  { %>
+                    <script>
+                        swal("SUCCESS","Staff Created !!", "success");
+                    </script>
+                            <%}%>
+
+                    <% if(msg == 2) {%>
+                        <script>
+                            swal("Error","Some Error Occured!!", "error");
+                        </script>
+
+                <%}%>
+                <!-- Messages Display End-->
+
+                <!-- Staffs Bulk Upload Start -->
+                <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#UploadStaffModal">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-file-upload"></i>
+                    </span>
+                    <span class="text">Staffs File Upload</span>
+                </a>
+                <!-- Staffs Bulk Upload End -->
+
+                <!-- Staffs Bulk Template Start -->
+                <a id="download_link" download="template_staffs.xlsx" class="nav-link btn btn-warning btn-icon-split ml-2" href="../template/Staff_Template.xlsx">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-file-excel"></i>
+                    </span>
+                    <span class="text">Download Staffs Template</span>
+                </a>
+                <!-- Staffs Bulk Template End -->
+
+
+
+                <!-- Faculty Form Start -->
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <form class="user" action="/add_staff" method="POST">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                aria-describedby="emailHelp"
+                                                placeholder="Name"
+                                                name="Name">
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <input type="text" class="form-control form-control-user"
+                                                    placeholder="Staff ID"
+                                                    name="Staff_ID">
+                                            </div>
+
+                                            <div class="form-group col">
+                                                <select class="form-control"
+                                                placeholder="Department"
+                                                name="Department" style="border-radius: 50px;height: 50px;">
+                                                    <option value="CSE">CSE</option>
+                                                    <option value="EEE">EEE</option>
+                                                    <option value="MECHA">MECHA</option>
+                                                    <option value="MECHB">MECHB</option>
+                                                    <option value="IT">IT</option>
+                                                    <option value="ECE">ECE</option>
+                                                </select>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="form-group col">
+                                                <input type="text" class="form-control form-control-user"
+                                                    placeholder="Role"
+                                                    name="Role">
+                                            </div>
+                                            <div class="form-group col">
+                                                <input type="text" class="form-control form-control-user"
+                                                    placeholder="Username"
+                                                    name="Username">
+                                            </div>
+                                            <div class="form-group col">
+                                                <input type="text" class="form-control form-control-user"
+                                                    placeholder="Password"
+                                                    name="password">
+                                            </div>
+                                        </div>
+                                    <hr>
+                                    <input type="submit" name="Signup" value="SUBMIT"  class="btn btn-primary btn-user btn-block" >
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faculty Form End -->
+
+
+            <!-- Footer -->
+            <%- include('../partials/footer'); %>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal Start -->
+    <%- include('../partials/modals/logout_modal'); %>
+    <!-- Logout Modal End   -->
+
+    <!-- Staff Bulk Upload Start -->
+    <%- include('../partials/modals/staffs/staffBulkUpload'); %>
+    <!-- Staff Bulk Upload End   -->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
+</body>
+
+</html>

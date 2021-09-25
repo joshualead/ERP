@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+    <!--css for filters-->
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+        
+    #myInput {
+        background-image: url('../img/searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 20px 12px 40px;
+        border: 3px solid #ddd;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+    </style>
+    
+</head>
+    
+<body id="page-top">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Side Bar start -->
+        <%- include('../partials/sidebar_admin'); %>
+        <!-- Side Bar end   -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+
+                <!-- Begin Page Content -->
+                   <div class="container-fluid">
+
+                    <!-- Course Removal Messages Display Start -->
+                    <% if(result == 2)  { %>
+                        <script>
+                            swal("SUCCESS","Course Removed Successfully", "success");
+                        </script>
+                    <%}%>
+            
+                    <% if(result == 1) {%>    
+                        <script>
+                            swal("Error","Couldn't remove the course", "error");
+                        </script>
+                    <%}%> 
+                    <!-- Course Removal Messages Display End-->
+
+                    <!-- Course Edit Messages Display Start -->
+                    <% if(update == 1)  { %>
+                        <script>
+                            swal("SUCCESS","Successfully done the changes", "success");
+                        </script>
+                    <%}%>
+            
+                    <% if(update == 2) {%>    
+                        <script>
+                            swal("Error","Some Error Occured", "error");
+                        </script>
+                    <%}%> 
+                    <!-- Course Edit Messages Display End-->                    
+
+                    <!-- DataTables Start -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h4 class="m-0 font-weight-bold text-primary">Courses List</h6>
+                        </div>
+                        <div class="card-body">
+                            <!-- Courses Report Download Start -->
+                            <a id="download_link" class="nav-link btn btn-warning btn-icon-split ml-2" href="#">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-file-excel"></i>
+                                </span>
+                                <span class="text">Download Courses Report</span>
+                            </a>
+                          
+                            <a id="addcourse" class="btn btn-success btn-icon-split" href="/course_entry">
+                              <span class="icon text-white-50">
+                                  <i class="fas fa-file-upload"></i>
+                              </span>
+                              <span class="text">Add Courses</span>
+                          </a>
+  
+                            
+
+                            <!-- Courses Report Download End -->
+
+                            <div class="table-responsive">
+                                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Here...">
+                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-toggle="table" data-search="true" data-filter-control="true" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                    <thead>
+                                        <tr>
+                                            <th>Course ID</th>
+                                            <th>Staff ID</th>
+                                            <th>Course Code</th>
+                                            <th>Course Name</th>
+                                            <th>Semester</th>
+                                            <th>Year</th>
+                                            <th>Regulation</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                <tbody id="dataTable-body">
+                                    <% if(data.length!=0){
+                                        data.forEach(function(data){
+                                        %>
+                                        <tr>
+                                            <td><%=data.Course_ID%></td>
+                                            <td><%=data.Staff_ID%></td>
+                                            <td><%=data.Course_Code%></td>
+                                            <td><%=data.Course_Name%></td>
+                                            <td><%=data.Semester%></td>
+                                            <td><%=data.Year%></td>
+                                            <td><%=data.Regulation%></td>
+                                            <th><a class="btn btn-warning btn-rounded btn-sm w-100" href="#" data-toggle="modal" data-target="#editModal" 
+                                                onclick="edit('<%= data.Course_ID %>')">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </th>
+                                            <th><a class="btn btn-danger btn-rounded btn-sm my-0 w-75" href=/course_table/Delete/<%=data.Course_ID%>>
+                                                <i class="fas fa-trash"></i></a>
+                                            </th>
+                                        </tr>
+                                        <%}) %>
+                                        <% } else{ %>
+                                            <tr>
+                                                <td colspan="10">No Courses Found</td>
+                                            </tr>
+                                        <% } %>
+                                </tbody>
+                                </table>
+                                
+                               
+
+                          
+                          
+                      
+                            </div>
+                        </div>
+                    </div>
+                    <!-- DataTables End   -->
+
+                    <!--Script for filters-->
+                    <script>
+                        function myFunction() {
+                          // Declare variables
+                          var input, filter, table, tr, td, i, txtValue;
+                          input = document.getElementById("myInput");
+                          filter = input.value.toUpperCase();
+                          table = document.getElementById("dataTable");
+                          tr = table.getElementsByTagName("tr");
+                        
+                          // Loop through all table rows, and hide those who don't match the search query
+                          for (i = 0; i < tr.length; i++) {
+                            td = tr[i].getElementsByTagName("td")[0];
+                            if (td) {
+                              txtValue = td.textContent || td.innerText;
+                              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                              } else {
+                                tr[i].style.display = "none";
+                              }
+                            }
+                          }
+                        }
+                    </script>
+                
+
+                    <script>
+                        $(document).ready(function(){
+                          $("#myInput").on("keyup", function() {
+                            console.log("Works")
+                            var value = $(this).val().toLowerCase();
+                            $("#dataTable-body tr").filter(function() {
+                              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                            });
+                          });
+                        });
+                    </script>
+
+                </div>
+                <!-- /.container-fluid -->
+
+        <!-- End of Content Wrapper -->
+
+        </div>
+    <!-- End of Page Wrapper -->
+    </div>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Edit Course Modal Start -->
+    <% - include('../partials/modals/courses/editCourseModal'); %>
+    <!-- Edit Course Modal End -->
+
+    <!-- Logout Modal Start -->
+    <%- include('../partials/modals/logout_modal'); %>
+    <!-- Logout Modal End   -->
+    
+    <!-- edit script-->
+    <script>
+        function edit(Course_Id){
+
+            // console.log(Course_Id);
+
+            <% data.forEach(function (course) { %>
+                if(Course_Id == "<%= course.Course_ID%>"){
+
+                    //Initial Values  
+                    document.getElementById("Staff_ID_Edit").value = "<%=course.Staff_ID%>";  
+                    document.getElementById("Course_Code_Edit").value = "<%=course.Course_Code%>"; 
+                    document.getElementById("Course_Name_Edit").value = "<%=course.Course_Name%>";       
+                    document.getElementById("Semester_Edit").value = "<%=course.Semester%>";     
+                    document.getElementById("Year_Edit").value = "<%=course.Year%>";     
+                    document.getElementById("Department_Edit").value = "<%=course.Department%>";
+                    document.getElementById("Regulation_Edit").value = "<%=course.Regulation%>";
+
+}       
+                    
+            <% }) %>
+            }
+    </script>
+
+      <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#alu-tab-down").DataTable({
+          scrollX: true,
+        });
+        $(".dataTables_length").addClass("bs-select");
+      });
+    </script>
+
+    <script>
+      $("#download_link").on("click", function (e) {
+        TableToExcel.convert(document.getElementById("dataTable"), {
+          name: "courses-data.xlsx",
+          sheet: {
+            name: "Sheet 1",
+          },
+        });
+      });
+    </script>
+
+
+<!-- EDIT COURSE MODAL-->
+<div
+  class="modal fade"
+  id="editModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+        <button
+          class="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Edit Form Start-->
+        <form class="user" action="/edit_course" method="POST">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control form-control-user"
+              aria-describedby="emailHelp"
+              placeholder="Course Name"
+              name="Course_Name"
+              id="Course_Name_Edit"
+            />
+          </div>
+
+          <div class="row">
+            <div class="form-group col">
+              <input
+                type="text"
+                class="form-control form-control-user"
+                placeholder="Course Code"
+                name="Course_Code"
+                id="Course_Code_Edit"
+              />
+            </div>
+
+
+            <div class="form-group col">
+              <input
+                type="number"
+                class="form-control form-control-user"
+                placeholder="Semester"
+                name="Semester"
+                id="Semester_Edit"
+              />
+            </div>
+          </div>
+
+          <div class="row d-flex">
+            <div class="form-group col-4">
+              <select
+                class="form-control"
+                placeholder="Department"
+                name="Department"
+                style="border-radius: 50px; height: 50px"
+              >
+                <option value="CSE">CSE</option>
+                <option value="EEE">EEE</option>
+                <option value="MECH">MECHA</option>
+                <option value="MECH">MECHB</option>
+                <option value="IT">IT</option>
+                <option value="ECE">ECE</option>
+              </select>
+            </div>
+
+
+            <div class="form-group col">
+              <input
+                type="text"
+                class="form-control form-control-user"
+                placeholder="Year"
+                name="Year"
+                id="Year_Edit"
+              />
+            </div>
+          </div>
+
+          <div class="row d-flex">
+            <div class="form-group col">
+              <input
+                type="text"
+                class="form-control form-control-user"
+                placeholder="Regulation"
+                name="Regulation"
+                id="Regulation_Edit"
+              />
+            </div>
+
+            <div class="form-group col">
+              <input
+                type="number"
+                class="form-control form-control-user"
+                placeholder="Department"
+                name="Department"
+                id="Department_Edit"
+              />
+            </div>
+          </div>
+
+          <hr />
+          <input
+            type="submit"
+            name="edit"
+            value="Save Changes"
+            class="btn btn-success btn-user btn-block"
+          />
+        </form>
+        <!-- Edit Form End-->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
+</body>
+
+</html>
+
